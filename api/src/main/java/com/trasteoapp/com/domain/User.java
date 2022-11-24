@@ -20,6 +20,21 @@ import org.hibernate.annotations.BatchSize;
  */
 @Entity
 @Table(name = "jhi_user")
+@NamedEntityGraph(name = "user-entity-graph",
+attributeNodes = {
+    @NamedAttributeNode("login"),
+    @NamedAttributeNode("password"),
+    @NamedAttributeNode("firstname"),
+    @NamedAttributeNode("lastname"),
+    @NamedAttributeNode("email"),
+    @NamedAttributeNode("activated"),
+    @NamedAttributeNode("langKey"),
+    @NamedAttributeNode("imageUrl"),
+    @NamedAttributeNode("activationKey"),
+    @NamedAttributeNode("resetKey"),
+    @NamedAttributeNode("resetDate"),
+    @NamedAttributeNode("authorities"),
+})
 public class User extends AbstractAuditingEntity<Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;

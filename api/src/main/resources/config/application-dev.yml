@@ -32,14 +32,19 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/trasteoApplication
-    username: trasteoApplication
-    password:
+    url: jdbc:postgresql://localhost:5432/trasteoDatabase
+    username: postgres
+    password: postgres
     hikari:
       poolName: Hikari
       auto-commit: false
   jpa:
     database-platform: tech.jhipster.domain.util.FixedPostgreSQL10Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
