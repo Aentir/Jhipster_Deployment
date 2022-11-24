@@ -97,6 +97,14 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+          <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('address')?.errors?.required"> Este campo es obligatorio. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" for="field_manager">Manager</label>
           <select
             class="form-control"

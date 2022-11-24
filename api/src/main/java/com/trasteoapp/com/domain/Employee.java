@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 /**
  * The Employee entity.
@@ -54,6 +55,10 @@ public class Employee implements Serializable {
 
     @Column(name = "file_content_type")
     private String fileContentType;
+
+    @NotNull
+    @Column(name = "address", nullable = false)
+    private String address;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "manager", "department" }, allowSetters = true)
@@ -211,6 +216,19 @@ public class Employee implements Serializable {
         this.fileContentType = fileContentType;
     }
 
+    public String getAddress() {
+        return this.address;
+    }
+
+    public Employee address(String address) {
+        this.setAddress(address);
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Employee getManager() {
         return this.manager;
     }
@@ -271,6 +289,7 @@ public class Employee implements Serializable {
             ", fileType='" + getFileType() + "'" +
             ", file='" + getFile() + "'" +
             ", fileContentType='" + getFileContentType() + "'" +
+            ", address='" + getAddress() + "'" +
             "}";
     }
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.Lob;
+import javax.validation.constraints.*;
 
 /**
  * A DTO for the {@link com.trasteoapp.com.domain.Employee} entity.
@@ -39,6 +40,10 @@ public class EmployeeDTO implements Serializable {
     private byte[] file;
 
     private String fileContentType;
+
+    @NotNull
+    private String address;
+
     private EmployeeDTO manager;
 
     private DepartmentDTO department;
@@ -131,6 +136,14 @@ public class EmployeeDTO implements Serializable {
         this.fileContentType = fileContentType;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public EmployeeDTO getManager() {
         return manager;
     }
@@ -182,6 +195,7 @@ public class EmployeeDTO implements Serializable {
             ", commissionPct=" + getCommissionPct() +
             ", fileType='" + getFileType() + "'" +
             ", file='" + getFile() + "'" +
+            ", address='" + getAddress() + "'" +
             ", manager=" + getManager() +
             ", department=" + getDepartment() +
             "}";

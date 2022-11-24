@@ -29,6 +29,7 @@ describe('Employee Form Service', () => {
             commissionPct: expect.any(Object),
             fileType: expect.any(Object),
             file: expect.any(Object),
+            address: expect.any(Object),
             manager: expect.any(Object),
             department: expect.any(Object),
           })
@@ -50,6 +51,7 @@ describe('Employee Form Service', () => {
             commissionPct: expect.any(Object),
             fileType: expect.any(Object),
             file: expect.any(Object),
+            address: expect.any(Object),
             manager: expect.any(Object),
             department: expect.any(Object),
           })

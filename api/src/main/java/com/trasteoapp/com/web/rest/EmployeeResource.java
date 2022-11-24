@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +56,7 @@ public class EmployeeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/employees")
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) throws URISyntaxException {
+    public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) throws URISyntaxException {
         log.debug("REST request to save Employee : {}", employeeDTO);
         if (employeeDTO.getId() != null) {
             throw new BadRequestAlertException("A new employee cannot already have an ID", ENTITY_NAME, "idexists");
@@ -79,7 +81,7 @@ public class EmployeeResource {
     @PutMapping("/employees/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody EmployeeDTO employeeDTO
+        @Valid @RequestBody EmployeeDTO employeeDTO
     ) throws URISyntaxException {
         log.debug("REST request to update Employee : {}, {}", id, employeeDTO);
         if (employeeDTO.getId() == null) {
@@ -114,7 +116,7 @@ public class EmployeeResource {
     @PatchMapping(value = "/employees/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<EmployeeDTO> partialUpdateEmployee(
         @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody EmployeeDTO employeeDTO
+        @NotNull @RequestBody EmployeeDTO employeeDTO
     ) throws URISyntaxException {
         log.debug("REST request to partial update Employee partially : {}, {}", id, employeeDTO);
         if (employeeDTO.getId() == null) {

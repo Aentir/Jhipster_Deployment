@@ -17,6 +17,5 @@ public interface DepartmentMapper extends EntityMapper<DepartmentDTO, Department
     @Named("locationId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "city", source = "city")
     LocationDTO toDtoLocationId(Location location);
 }

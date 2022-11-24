@@ -53,6 +53,10 @@
             {{ employee.fileContentType }}, {{ byteSize(employee.file) }}
           </div>
         </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+          <span>{{ employee.address }}</span>
+        </dd>
         <dt><span>Manager</span></dt>
         <dd>
           <div *ngIf="employee.manager">

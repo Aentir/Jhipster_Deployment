@@ -63,6 +63,9 @@ class EmployeeResourceIT {
     private static final String DEFAULT_FILE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_FILE_CONTENT_TYPE = "image/png";
 
+    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/employees";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -100,7 +103,8 @@ class EmployeeResourceIT {
             .commissionPct(DEFAULT_COMMISSION_PCT)
             .fileType(DEFAULT_FILE_TYPE)
             .file(DEFAULT_FILE)
-            .fileContentType(DEFAULT_FILE_CONTENT_TYPE);
+            .fileContentType(DEFAULT_FILE_CONTENT_TYPE)
+            .address(DEFAULT_ADDRESS);
         return employee;
     }
 
@@ -121,7 +125,8 @@ class EmployeeResourceIT {
             .commissionPct(UPDATED_COMMISSION_PCT)
             .fileType(UPDATED_FILE_TYPE)
             .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE);
+            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
+            .address(UPDATED_ADDRESS);
         return employee;
     }
 
@@ -154,6 +159,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getFileType()).isEqualTo(DEFAULT_FILE_TYPE);
         assertThat(testEmployee.getFile()).isEqualTo(DEFAULT_FILE);
         assertThat(testEmployee.getFileContentType()).isEqualTo(DEFAULT_FILE_CONTENT_TYPE);
+        assertThat(testEmployee.getAddress()).isEqualTo(DEFAULT_ADDRESS);
     }
 
     @Test
@@ -177,6 +183,24 @@ class EmployeeResourceIT {
 
     @Test
     @Transactional
+    void checkAddressIsRequired() throws Exception {
+        int databaseSizeBeforeTest = employeeRepository.findAll().size();
+        // set the field null
+        employee.setAddress(null);
+
+        // Create the Employee, which fails.
+        EmployeeDTO employeeDTO = employeeMapper.toDto(employee);
+
+        restEmployeeMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(employeeDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Employee> employeeList = employeeRepository.findAll();
+        assertThat(employeeList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllEmployees() throws Exception {
         // Initialize the database
         employeeRepository.saveAndFlush(employee);
@@ -196,7 +220,8 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.[*].commissionPct").value(hasItem(DEFAULT_COMMISSION_PCT.intValue())))
             .andExpect(jsonPath("$.[*].fileType").value(hasItem(DEFAULT_FILE_TYPE)))
             .andExpect(jsonPath("$.[*].fileContentType").value(hasItem(DEFAULT_FILE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].file").value(hasItem(Base64Utils.encodeToString(DEFAULT_FILE))));
+            .andExpect(jsonPath("$.[*].file").value(hasItem(Base64Utils.encodeToString(DEFAULT_FILE))))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)));
     }
 
     @Test
@@ -220,7 +245,8 @@ class EmployeeResourceIT {
             .andExpect(jsonPath("$.commissionPct").value(DEFAULT_COMMISSION_PCT.intValue()))
             .andExpect(jsonPath("$.fileType").value(DEFAULT_FILE_TYPE))
             .andExpect(jsonPath("$.fileContentType").value(DEFAULT_FILE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.file").value(Base64Utils.encodeToString(DEFAULT_FILE)));
+            .andExpect(jsonPath("$.file").value(Base64Utils.encodeToString(DEFAULT_FILE)))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS));
     }
 
     @Test
@@ -252,7 +278,8 @@ class EmployeeResourceIT {
             .commissionPct(UPDATED_COMMISSION_PCT)
             .fileType(UPDATED_FILE_TYPE)
             .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE);
+            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
+            .address(UPDATED_ADDRESS);
         EmployeeDTO employeeDTO = employeeMapper.toDto(updatedEmployee);
 
         restEmployeeMockMvc
@@ -277,6 +304,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getFileType()).isEqualTo(UPDATED_FILE_TYPE);
         assertThat(testEmployee.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testEmployee.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
+        assertThat(testEmployee.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
 
     @Test
@@ -362,7 +390,8 @@ class EmployeeResourceIT {
             .commissionPct(UPDATED_COMMISSION_PCT)
             .fileType(UPDATED_FILE_TYPE)
             .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE);
+            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
+            .address(UPDATED_ADDRESS);
 
         restEmployeeMockMvc
             .perform(
@@ -386,6 +415,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getFileType()).isEqualTo(UPDATED_FILE_TYPE);
         assertThat(testEmployee.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testEmployee.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
+        assertThat(testEmployee.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
 
     @Test
@@ -410,7 +440,8 @@ class EmployeeResourceIT {
             .commissionPct(UPDATED_COMMISSION_PCT)
             .fileType(UPDATED_FILE_TYPE)
             .file(UPDATED_FILE)
-            .fileContentType(UPDATED_FILE_CONTENT_TYPE);
+            .fileContentType(UPDATED_FILE_CONTENT_TYPE)
+            .address(UPDATED_ADDRESS);
 
         restEmployeeMockMvc
             .perform(
@@ -434,6 +465,7 @@ class EmployeeResourceIT {
         assertThat(testEmployee.getFileType()).isEqualTo(UPDATED_FILE_TYPE);
         assertThat(testEmployee.getFile()).isEqualTo(UPDATED_FILE);
         assertThat(testEmployee.getFileContentType()).isEqualTo(UPDATED_FILE_CONTENT_TYPE);
+        assertThat(testEmployee.getAddress()).isEqualTo(UPDATED_ADDRESS);
     }
 
     @Test

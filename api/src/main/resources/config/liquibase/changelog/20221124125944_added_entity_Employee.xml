@@ -67,10 +67,10 @@
     -->
     <changeSet id="20221124125944-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/employee.csv"
-                  separator=";"
-                  tableName="employee"
-                  usePreparedStatements="true">
+            file="config/liquibase/fake-data/employee.csv"
+            separator=";"
+            tableName="employee"
+            usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="first_name" type="string"/>
             <column name="last_name" type="string"/>

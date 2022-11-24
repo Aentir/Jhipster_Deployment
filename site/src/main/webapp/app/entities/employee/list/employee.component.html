@@ -92,6 +92,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
+          <th scope="col" jhiSortBy="address">
+            <div class="d-flex">
+              <span>Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
           <th scope="col" jhiSortBy="manager.id">
             <div class="d-flex">
               <span>Manager</span>
@@ -124,6 +130,7 @@
             <a *ngIf="employee.file" (click)="openFile(employee.file, employee.fileContentType)">Abrir</a>
             <span *ngIf="employee.file">{{ employee.fileContentType }}, {{ byteSize(employee.file) }}</span>
           </td>
+          <td>{{ employee.address }}</td>
           <td>
             <div *ngIf="employee.manager">
               <a [routerLink]="['/employee', employee.manager.id, 'view']">{{ employee.manager.id }}</a>

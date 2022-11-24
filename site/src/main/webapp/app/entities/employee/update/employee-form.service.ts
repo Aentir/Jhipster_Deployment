@@ -41,6 +41,7 @@ type EmployeeFormGroupContent = {
   fileType: FormControl<EmployeeFormRawValue['fileType']>;
   file: FormControl<EmployeeFormRawValue['file']>;
   fileContentType: FormControl<EmployeeFormRawValue['fileContentType']>;
+  address: FormControl<EmployeeFormRawValue['address']>;
   manager: FormControl<EmployeeFormRawValue['manager']>;
   department: FormControl<EmployeeFormRawValue['department']>;
 };
@@ -72,6 +73,9 @@ export class EmployeeFormService {
       fileType: new FormControl(employeeRawValue.fileType),
       file: new FormControl(employeeRawValue.file),
       fileContentType: new FormControl(employeeRawValue.fileContentType),
+      address: new FormControl(employeeRawValue.address, {
+        validators: [Validators.required],
+      }),
       manager: new FormControl(employeeRawValue.manager),
       department: new FormControl(employeeRawValue.department),
     });

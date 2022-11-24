@@ -13,6 +13,7 @@ export interface IEmployee {
   fileType?: string | null;
   file?: string | null;
   fileContentType?: string | null;
+  address?: string | null;
   manager?: Pick<IEmployee, 'id'> | null;
   department?: Pick<IDepartment, 'id'> | null;
 }
