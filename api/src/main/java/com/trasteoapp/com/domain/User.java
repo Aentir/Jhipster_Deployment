@@ -24,8 +24,8 @@ import org.hibernate.annotations.BatchSize;
 attributeNodes = {
     @NamedAttributeNode("login"),
     @NamedAttributeNode("password"),
-    @NamedAttributeNode("firstname"),
-    @NamedAttributeNode("lastname"),
+    @NamedAttributeNode("firstName"),
+    @NamedAttributeNode("lastName"),
     @NamedAttributeNode("email"),
     @NamedAttributeNode("activated"),
     @NamedAttributeNode("langKey"),

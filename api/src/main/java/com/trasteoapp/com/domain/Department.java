@@ -12,6 +12,11 @@ import javax.validation.constraints.*;
  */
 @Entity
 @Table(name = "department")
+@NamedEntityGraph(name = "department-entity-graph", attributeNodes = {
+    /*@NamedAttributeNode("departmentName"),
+    @NamedAttributeNode("location"),*/
+    @NamedAttributeNode("employees")
+})
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Department implements Serializable {
 
