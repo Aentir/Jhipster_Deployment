@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <changeSet author="jl.lloret" id="20221124162344-1">
-        <addColumn schemaName= "trasteoDatabase"
+        <addColumn schemaName= "public"
                    tableName="employee" >
             <column name="address"
                     type="varchar(255)"/>
